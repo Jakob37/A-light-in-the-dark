@@ -19,9 +19,6 @@ public class Health : MonoBehaviour
         int torchDamage = 10;
 
         var torches = FindObjectsOfType<Torch>();
-        // print("Found torches", torches);
-        // print hello world
-        // log hello
 
         foreach (var torch in torches)
         {

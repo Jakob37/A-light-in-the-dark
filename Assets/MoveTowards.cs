@@ -7,6 +7,7 @@ public class MoveTowards : MonoBehaviour
 
     public GameObject target;
     public float speed = 0.1f;
+    public float detectionRange = 1;
 
     void Start()
     {
@@ -21,7 +22,11 @@ public class MoveTowards : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (this.target != null)
+        var targetWithinRange = Vector2.Distance(
+            this.transform.position, 
+            this.target.transform.position
+        ) < this.detectionRange;
+        if (this.target != null && targetWithinRange)
         {
             this.transform.position = Vector2.MoveTowards(
                 this.transform.position,
