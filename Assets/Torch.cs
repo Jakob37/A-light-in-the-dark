@@ -18,6 +18,11 @@ public class Torch : MonoBehaviour
         this.currDuration = this.fullDuration;
     }
 
+    public float getRadius()
+    {
+        return this.light2D.pointLightOuterRadius;
+    }
+
     // Start is called before the first frame update
     void Start()
     {
