@@ -13,11 +13,11 @@ public class MoveTowards : MonoBehaviour
     {
 
         var torch = this.getClosestTorchInRange();
-        if (torch != null)
+        if (torch != null && torch.getRadius() > 0)
         {
             var torchObj = torch.gameObject;
             this.moveTowards(torchObj, -this.speed);
-            torch.consume(Time.deltaTime);
+            // torch.consume(Time.deltaTime);
         }
 
         if (this.getTargetInRange())

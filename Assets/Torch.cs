@@ -6,8 +6,8 @@ using UnityEngine.Rendering.Universal;
 public class Torch : MonoBehaviour
 {
 
-    public float fullDuration = 5;
-    public float fullLightRadius = 6;
+    public float fullDuration;
+    public float fullLightRadius;
     private float currDuration;
 
     private Light2D light2D;
@@ -15,6 +15,7 @@ public class Torch : MonoBehaviour
     public void lit()
     {
         this.currDuration = this.fullDuration;
+        this.light2D.pointLightOuterRadius = this.fullLightRadius;
     }
 
     public float getRadius()
@@ -22,10 +23,10 @@ public class Torch : MonoBehaviour
         return this.light2D.pointLightOuterRadius;
     }
 
-    public void consume(float amount)
-    {
-        this.currDuration -= amount;
-    }
+    // public void consume(float amount)
+    // {
+    //     this.currDuration -= amount;
+    // }
 
     // Start is called before the first frame update
     void Start()
@@ -41,16 +42,13 @@ public class Torch : MonoBehaviour
             currDuration -= Time.deltaTime;
         }
 
-        if (currDuration > 0)
+        // dim light
+        this.light2D.intensity = this.fullLightRadius * (currDuration / fullDuration);
+        if (currDuration < 0)
         {
-            this.light2D.intensity = 1;
+            this.extinguishLight();
         }
-        else
-        {
-            this.light2D.intensity = 0;
-        }
-
-        this.light2D.pointLightOuterRadius = this.fullLightRadius * (currDuration / fullDuration);
+        // this.light2D.pointLightOuterRadius = this.fullLightRadius * (currDuration / fullDuration);
     }
 
     // Collision detection
@@ -61,5 +59,11 @@ public class Torch : MonoBehaviour
             // var torch = other.gameObject.GetComponent<Torch>();
             this.lit();
         }
+    }
+
+    private void extinguishLight()
+    {
+        this.light2D.pointLightOuterRadius = 0;
+        this.light2D.intensity = 0;
     }
 }

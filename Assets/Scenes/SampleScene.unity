@@ -1624,6 +1624,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3558086342198605754, guid: 5b0d8f9f4f80c9063b5c389b64b906ae, type: 3}
+      propertyPath: fullLightRadius
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 3558086342198605755, guid: 5b0d8f9f4f80c9063b5c389b64b906ae, type: 3}
       propertyPath: m_ApplyToSortingLayers.Array.size
       value: 4
