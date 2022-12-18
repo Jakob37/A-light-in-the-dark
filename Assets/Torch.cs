@@ -8,12 +8,11 @@ public class Torch : MonoBehaviour
 
     public float fullDuration = 5;
     public float fullLightRadius = 6;
-    private int currLightRadius = 0;
-    private float currDuration = 5;
+    private float currDuration;
 
     private Light2D light2D;
 
-    public void resetLight()
+    public void lit()
     {
         this.currDuration = this.fullDuration;
     }
@@ -21,6 +20,11 @@ public class Torch : MonoBehaviour
     public float getRadius()
     {
         return this.light2D.pointLightOuterRadius;
+    }
+
+    public void consume(float amount)
+    {
+        this.currDuration -= amount;
     }
 
     // Start is called before the first frame update
@@ -47,5 +51,15 @@ public class Torch : MonoBehaviour
         }
 
         this.light2D.pointLightOuterRadius = this.fullLightRadius * (currDuration / fullDuration);
+    }
+
+    // Collision detection
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.tag == "Fire")
+        {
+            // var torch = other.gameObject.GetComponent<Torch>();
+            this.lit();
+        }
     }
 }

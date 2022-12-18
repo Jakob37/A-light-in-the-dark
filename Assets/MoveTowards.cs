@@ -27,12 +27,13 @@ public class MoveTowards : MonoBehaviour
         {
             if (torch.getRadius() > Vector2.Distance(this.transform.position, torch.transform.position))
             {
-                this.target = torch.gameObject;
+                var torchObj = torch.gameObject;
                 this.transform.position = Vector2.MoveTowards(
                     this.transform.position,
-                    this.target.transform.position,
+                    torchObj.transform.position,
                     -this.speed
                 );
+                torch.consume(Time.deltaTime);
             }
         }
 

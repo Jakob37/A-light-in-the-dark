@@ -17,7 +17,7 @@ public class Player : MonoBehaviour
 
         if (Input.GetKey(KeyCode.Space))
         {
-            this.torch.resetLight();
+            this.torch.lit();
         }
 
         if (Input.GetKey(KeyCode.RightArrow))
