@@ -9,7 +9,7 @@ public class MoveTowards : MonoBehaviour
     public float speed = 0.1f;
     public float detectionRange = 1;
 
-    void FixedUpdate()
+    void Update()
     {
 
         var torch = this.getClosestTorchInRange();
