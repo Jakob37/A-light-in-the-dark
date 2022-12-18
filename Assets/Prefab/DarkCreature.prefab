@@ -98,8 +98,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 17370211d61985e4fb3b15baf45d1a2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 3558086342198605767, guid: 5b0d8f9f4f80c9063b5c389b64b906ae, type: 3}
-  speed: 0.02
+  target: {fileID: 0}
+  speed: 0.05
   detectionRange: 5
 --- !u!114 &3602982958294168160
 MonoBehaviour:

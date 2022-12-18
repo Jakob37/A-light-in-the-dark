@@ -22,6 +22,20 @@ public class MoveTowards : MonoBehaviour
 
     void FixedUpdate()
     {
+        var torches = FindObjectsOfType<Torch>();
+        foreach (var torch in torches)
+        {
+            if (torch.getRadius() > Vector2.Distance(this.transform.position, torch.transform.position))
+            {
+                this.target = torch.gameObject;
+                this.transform.position = Vector2.MoveTowards(
+                    this.transform.position,
+                    this.target.transform.position,
+                    -this.speed
+                );
+            }
+        }
+
         var targetWithinRange = Vector2.Distance(
             this.transform.position, 
             this.target.transform.position
