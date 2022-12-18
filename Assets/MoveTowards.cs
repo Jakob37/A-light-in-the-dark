@@ -9,45 +9,64 @@ public class MoveTowards : MonoBehaviour
     public float speed = 0.1f;
     public float detectionRange = 1;
 
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
     void FixedUpdate()
+    {
+
+        var torch = this.getClosestTorchInRange();
+        if (torch != null)
+        {
+            var torchObj = torch.gameObject;
+            this.moveTowards(torchObj, -this.speed);
+            torch.consume(Time.deltaTime);
+        }
+
+        if (this.getTargetInRange())
+        {
+            this.moveTowards(this.target, this.speed);
+        } else {
+            this.idleMove(this.speed);
+        }
+    }
+
+    private Torch getClosestTorchInRange()
     {
         var torches = FindObjectsOfType<Torch>();
         foreach (var torch in torches)
         {
             if (torch.getRadius() > Vector2.Distance(this.transform.position, torch.transform.position))
             {
-                var torchObj = torch.gameObject;
-                this.transform.position = Vector2.MoveTowards(
-                    this.transform.position,
-                    torchObj.transform.position,
-                    -this.speed
-                );
-                torch.consume(Time.deltaTime);
+                return torch;
             }
         }
+        return null;
+    }
 
-        var targetWithinRange = Vector2.Distance(
-            this.transform.position, 
+    private bool getTargetInRange()
+    {
+        if (this.target == null)
+        {
+            return false;
+        }
+        return Vector2.Distance(
+            this.transform.position,
             this.target.transform.position
         ) < this.detectionRange;
-        if (this.target != null && targetWithinRange)
-        {
-            this.transform.position = Vector2.MoveTowards(
-                this.transform.position,
-                this.target.transform.position,
-                this.speed
-            );
-        }
+    }
+
+    private void moveTowards(GameObject target, float speed)
+    {
+        this.transform.position = Vector2.MoveTowards(
+            this.transform.position,
+            target.transform.position,
+            speed
+        );
+    }
+
+    private void idleMove(float speed)
+    {
+        this.transform.position = new Vector2(
+            this.transform.position.x + Random.Range(-speed, speed),
+            this.transform.position.y + Random.Range(-speed, speed)
+        );
     }
 }
