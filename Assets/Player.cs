@@ -5,6 +5,7 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
 
+    public float speed;
     private Torch torch;
 
     void Start()
@@ -14,34 +15,28 @@ public class Player : MonoBehaviour
 
     void Update()
     {
-
-        if (Input.GetKey(KeyCode.Space))
-        {
-            this.torch.lit();
-        }
-
         if (Input.GetKey(KeyCode.RightArrow))
         {
             this.transform.position = new Vector2(
-                this.transform.position.x + 0.1f, this.transform.position.y
+                this.transform.position.x + speed, this.transform.position.y
             );
         }
         if (Input.GetKey(KeyCode.LeftArrow))
         {
             this.transform.position = new Vector2(
-                this.transform.position.x - 0.1f, this.transform.position.y
+                this.transform.position.x - speed, this.transform.position.y
             );
         }
         if (Input.GetKey(KeyCode.UpArrow))
         {
             this.transform.position = new Vector2(
-                this.transform.position.x, this.transform.position.y + 0.1f
+                this.transform.position.x, this.transform.position.y + speed
             );
         }
         if (Input.GetKey(KeyCode.DownArrow))
         {
             this.transform.position = new Vector2(
-                this.transform.position.x, this.transform.position.y - 0.1f
+                this.transform.position.x, this.transform.position.y - speed
             );
         }
     }
